@@ -6,11 +6,28 @@
 
 **KAFF İkas Otomasyonu**, İkas e-ticaret panelinde ürün varyantlarını toplu olarak yönetmenizi sağlayan güçlü bir Chrome Extension'dır. Fiyat güncelleme, stok kontrolü ve görsel yükleme işlemlerini tek tıkla gerçekleştirin!
 
+> 📚 **Yeni Kullanıcı mısınız?** → Detaylı adım adım kılavuz için **[KULLANIM_TALIMATLARI.md](KULLANIM_TALIMATLARI.md)** dosyasını okuyun!
+
+---
+
+## 📑 Hızlı Erişim
+
+### 📘 Dokümantasyon
+- **[KULLANIM_TALIMATLARI.md](KULLANIM_TALIMATLARI.md)** - 🆕 Adım adım detaylı kullanım kılavuzu (Başlangıç için önerilen)
+- **[PRD.md](PRD.md)** - Ürün gereksinimleri ve teknik detaylar
+- **[TASKS.md](TASKS.md)** - Geliştirme yol haritası
+- **[DOM_ANALYSIS.md](DOM_ANALYSIS.md)** - İkas DOM yapısı analizi
+
+### 🚀 Hızlı Başlangıç İçin
+1. [Kurulum](#-kurulum) - Extension'ı Chrome'a yükleme
+2. [Kullanım Kılavuzu](#-kullanım-kılavuzu) - Temel özellikleri kullanma
+3. [Sorun Giderme](#️-sorun-giderme) - Yaygın hataları çözme
+
+---
+
 ---
 
 ## 🎯 Özellikler
-
-### 💰 Toplu Fiyat Güncelleme
 - Tüm varyantların fiyatlarını tek seferde güncelleyin
 - React state senkronizasyonu ile %100 uyumlu
 - Anlık güncelleme ve doğrulama
@@ -46,6 +63,8 @@
 
 ## 🚀 Kurulum
 
+> 💡 **Detaylı kurulum için**: [KULLANIM_TALIMATLARI.md - Bölüm 1](KULLANIM_TALIMATLARI.md#1%EF%B8%8F⃣-ilk-kurulum)
+
 ### Adım 1: Dosyaları İndirin
 ```bash
 # Git ile klonlayın
@@ -62,60 +81,72 @@ git clone https://github.com/veyselkilicerkan/kaff-ikas-otomasyon.git
    chrome://extensions
    ```
 
-2. **Geliştirici Modunu** açın (sağ üst köşede)
+2. **Geliştirici Modunu** sağ üst köşeden açın
    
 3. **"Paketlenmemiş öğe yükle"** butonuna tıklayın
 
 4. İndirdiğiniz **klasörü seçin** (`kaff-ikas-otomasyon`)
 
-5. ✅ Extension yüklendi! Sağ üst köşede KAFF logosunu göreceksiniz.
+5. ✅ Extension yüklendi! Sağ üst köşede KAFF logosunu göreceksiniz 🟡
+
+### Adım 3: İlk Test (Önemli!)
+
+1. İkas admin panelinize girin: `https://[mağazanız].ikas.com/admin`
+2. **Ürünler** → Herhangi bir ürün seçin
+3. **Varyantlar** sekmesine geçin
+4. KAFF logosuna 🟡 tıklayın
+5. Panel açılırsa **kurulum başarılı!** ✅
+
+⚠️ **"Bağlantı hatası" alırsanız**: Sayfayı **F5** ile yenileyin ve tekrar deneyin
 
 ---
 
 ## 📖 Kullanım Kılavuzu
 
+> 📚 **Daha detaylı anlatım için**: [KULLANIM_TALIMATLARI.md](KULLANIM_TALIMATLARI.md) dosyasındaki adım adım kılavuzu okuyun!
+
 ### 🔹 Fiyat Güncelleme
 
-1. İkas panelinde **ürün varyant sayfasına** gidin
-   - Örnek URL: `https://yourstore.ikas.com/admin/products/12345/variants`
+**Hızlı Özet:**
+1. İkas panelinde **ürün varyant sayfasına** gidin (`/variants` URL'inde olmalı)
+2. KAFF extension **logosuna tıklayın** 🟡
+3. **"Fiyat Güncelleme"** bölümünde yeni fiyatı girin (örn: `1299`)
+4. **"Tüm Fiyatları Güncelle"** butonuna tıklayın
+5. ✅ Tüm varyantların fiyatları 2-5 saniyede güncellenir!
 
-2. KAFF extension **logosuna tıklayın**
-
-3. **"Fiyat Güncelleme"** bölümünde:
-   - Yeni fiyatı girin (örn: `1299`)
-   - **"Tüm Fiyatları Güncelle"** butonuna tıklayın
-
-4. ✅ Tüm varyantların fiyatları anında güncellenir!
-
-**💡 İpucu**: Ondalıklı fiyatlar için virgül yerine nokta kullanın (örn: `1299.99`)
+**💡 İpucu**: 
+- Ondalıklı fiyatlar için nokta kullanın (örn: `1299.99`)
+- Virgül veya binlik ayraç kullanmayın
 
 ---
 
 ### 🔹 Stok Güncelleme
 
+**Hızlı Özet:**
 1. İkas panelinde **ürün varyant sayfasına** gidin
+2. KAFF extension'ı açın 🟡
+3. **"Stok Güncelleme"** bölümünde yeni stok miktarını girin (örn: `10000`)
+4. **"Tüm Stokları Güncelle"** butonuna tıklayın
+5. ⚠️ Onay penceresinde **"Tamam"** deyin
+6. ⏳ İşlem 30-60 saniye sürebilir (her varyant için popup açılır/kapanır)
+7. ✅ Tüm varyantların stokları güncellenir!
 
-2. KAFF extension'ı açın
+**⚙️ Teknik Not**: 
+- Stok güncelleme, İkas'ın popup mekanizmasını kullandığı için daha uzun sürer
+- İşlem sırasında fareyi kullanmayın, başka yere tıklamayın
+- **Stop butonu** ile dilediğiniz an durdurabilirsiniz
 
-3. **"Stok Güncelleme"** bölümünde:
-   - Yeni stok miktarını girin (örn: `10000`)
-   - **"Tüm Stokları Güncelle"** butonuna tıklayın
-
-4. ⚠️ Onay penceresi çıkacak → **"Tamam"** deyin
-
-5. ⏳ İşlem biraz sürebilir (her varyant için popup açılıp kapanır)
-
-6. ✅ Tüm varyantların stokları güncellenir!
-
-**⚙️ Teknik Not**: Stok güncelleme, İkas'ın popup mekanizmasını kullandığı için fiyat güncellemeden daha uzun sürer.
+**📚 Detaylı anlatım**: [KULLANIM_TALIMATLARI.md - Stok Güncelleme](KULLANIM_TALIMATLARI.md#4%EF%B8%8F⃣-stok-güncelleme)
 
 ---
 
 ### 🔹 Görsel Yükleme (En Güçlü Özellik!)
 
-#### Klasör Yapısı Hazırlığı
+> 📚 **Önemli**: Bu özellik için [KULLANIM_TALIMATLARI.md - Görsel Yükleme](KULLANIM_TALIMATLARI.md#5%EF%B8%8F⃣-görsel-yükleme-detaylı) bölümünü mutlaka okuyun! Klasör yapısı kritik öneme sahiptir.
 
-Görsel klasörünüzü şu şekilde organize edin:
+#### Hızlı Özet
+
+**1. Klasör Yapısını Hazırlayın:**
 
 ```
 📁 Telefon Kılıfları/
@@ -132,109 +163,95 @@ Görsel klasörünüzü şu şekilde organize edin:
     └── 📷 foto2.jpg
 ```
 
-**📌 Önemli Kurallar:**
-- Her model için **ayrı klasör** oluşturun
-- Klasör isimleri **varyant isimlerine benzer** olmalı
-- Sadece **`.jpg` veya `.jpeg`** dosyaları kullanın
-- Dosya boyutu **maksimum 10MB**
+**📌 Kritik Kurallar:**
+- ✅ Her model için **ayrı klasör** oluşturun
+- ✅ Klasör isimleri **varyant isimlerine benzer** olmalı (akıllı eşleştirme yapılır)
+- ✅ Sadece **`.jpg` veya `.jpeg`** dosyaları kullanın
+- ✅ Dosya boyutu **maksimum 10MB**
 
-#### Yükleme Adımları
-
-1. İkas panelinde **ürün varyant sayfasına** gidin
-
-2. KAFF extension'ı açın
-
-3. **"Görsel Yükleme"** bölümünde:
-   - **"Klasör Seç"** butonuna tıklayın
-   - Ana görseller klasörünü seçin
-
-4. ✅ Durum mesajı: "📁 12 klasör, 36 JPG hazır."
-
+**2. Extension'da Yükleme:**
+1. İkas varyant sayfasına gidin
+2. KAFF extension'ı açın 🟡
+3. **"Görsel Yükleme"** → **"Klasör Seç"** → Ana klasörü seçin
+4. Durum kontrolü: "📁 12 klasör, 36 JPG hazır." mesajını görün
 5. **"Tüm Görselleri Yükle"** butonuna tıklayın
-
-6. ⏳ Extension her varyant için:
-   - Eşleşen klasörü bulur
-   - O klasördeki tüm görselleri yükler
-   - İlerleme konsolda gösterilir
-
-7. ✅ Başarı mesajı alırsınız!
+6. ✅ Extension her varyanta uygun görselleri otomatik yükler! (1-3 dakika)
 
 #### 🧠 Akıllı Eşleştirme Algoritması
 
-Extension, klasör isimlerini varyant isimleriyle **token-based** olarak eşleştirir:
+Extension, klasör isimlerini varyant isimleriyle **token-based** (kelime bazlı) eşleştirir:
 
 | Klasör İsmi | Eşleşen Varyantlar |
 |-------------|-------------------|
-| `7-S25-S24-S23-S22 Ultra` | Samsung S25 Ultra, S24 Ultra, S23 Ultra, S22 Ultra |
-| `1-17 Pro Max - Pro` | iPhone 17 Pro Max, iPhone 17 Pro |
-| `10-s22 - s22 Plus` | Samsung S22 Plus, Samsung S22 |
+| `7-S25-S24-S23-S22 Ultra` | ✅ Samsung S25 Ultra<br>✅ S24 Ultra<br>✅ S23 Ultra<br>✅ S22 Ultra |
+| `1-17 Pro Max - Pro` | ✅ iPhone 17 Pro Max<br>✅ iPhone 17 Pro<br>❌ iPhone 17 (Pro yok) |
+| `10-s22 - s22 Plus` | ✅ Samsung S22 Plus<br>✅ Samsung S22 |
 
-**Avantajları**:
-- Büyük/küçük harf duyarsız
-- Türkçe karakter desteği
-- Çoklu model desteği
-- Harf/sayı kombinasyonları
+**Avantajlar:**
+- 🔤 Büyük/küçük harf duyarsız
+- 🇹🇷 Türkçe karakter desteği (İ, ı, ş, ç, vb.)
+- 🎯 Çoklu model desteği (1 klasör = 4 farklı model)
+- 🧩 Harf/sayı kombinasyonları (S25, 17 Pro, vb.)
+
+**📚 Detaylı örnekler**: [KULLANIM_TALIMATLARI.md - Akıllı Eşleştirme](KULLANIM_TALIMATLARI.md#-akıllı-eşleştirme-nasıl-çalışır)
 
 ---
 
 ## 🛠️ Sorun Giderme
 
+> 📚 **Daha fazla çözüm**: [KULLANIM_TALIMATLARI.md - Sık Yapılan Hatalar](KULLANIM_TALIMATLARI.md#6%EF%B8%8F⃣-sık-yapılan-hatalar)
+
 ### ❌ "Bağlantı hatası! Lütfen sayfayı yenileyin (F5)"
 
-**Neden**: Content script yüklenmemiş
+**Sebep**: Content script henüz yüklenmemiş
 
-**Çözüm**:
-1. İkas sayfasını **F5 ile yenileyin**
-2. Extension'ı **tekrar açın**
-3. Hala olmazsa: `chrome://extensions` → Extension'ı **yeniden yükleyin**
+**Hızlı Çözüm**:
+1. **F5** tuşuna basın (sayfa yenilenir)
+2. Extension'ı tekrar açın
+3. ✅ Çalışmalı!
+
+**Kalıcı Çözüm** (Tekrar olursa):
+- `chrome://extensions` → KAFF → **🔄 Yenile** → İkas sayfasını F5 ile yenile
 
 ---
 
 ### ❌ "Varyant sayfasında değilsiniz!"
 
-**Neden**: Yanlış sayfadasınız
+**Sebep**: Yanlış sayfadasınız
 
 **Çözüm**:
-- İkas panelinde → **Ürünler** → Bir ürün seçin → **Varyantlar** sekmesine gidin
-- URL şuna benzer olmalı: `https://yourstore.ikas.com/admin/products/*/variants`
+- İkas → **Ürünler** → Ürün seçin → **"Varyantlar"** sekmesine gidin
+- URL şuna benzemeli: `https://[mağaza].ikas.com/admin/products/*/variants`
 
 ---
 
 ### ⚠️ "İşlem zaman aşımına uğradı (30 saniye)"
 
-**Neden**: İnternet yavaş veya İkas sunucusu yanıt vermiyor
+**Sebep**: İnternet yavaş veya İkas sunucusu yanıt vermiyor
 
 **Çözüm**:
 1. İnternet bağlantınızı kontrol edin
 2. Birkaç saniye bekleyip **tekrar deneyin**
-3. Extension otomatik olarak **3 kez retry** deneyecek
+3. Extension otomatik **3 kez retry** deneyecek
 
 ---
 
-### ⚠️ "Dosya çok büyük, atlanıyor"
+### ⚠️ "Dosya çok büyük, atlanıyor (12 MB)"
 
-**Neden**: Görsel dosyası 10MB'dan büyük
+**Sebep**: Görsel dosyası 10MB'dan büyük
 
 **Çözüm**:
-1. Görseli bir editörde (Photoshop, GIMP, vb.) açın
-2. **Kalite azaltarak** veya **boyut düşürerek** kaydedin
-3. Hedef: Her görsel < 10MB
+1. Görseli bir editörde açın (Photoshop, Paint, vb.)
+2. **Kaliteyi azaltarak** veya **boyutu küçülterek** kaydedin
+3. Hedef: Her görsel < 10MB (önerilen: 500KB - 2MB)
 
-**💡 Öneri**: Web için görseller genelde 500KB - 2MB arası olmalı (hız optimizasyonu)
+**💡 Online Küçültme**: https://tinyjpg.com (ücretsiz, sürükle-bırak)
 
----
-
-### ❓ Yüklenen Görseller Beyaz Çıkıyor
-
-**Neden**: Bu sorun v1.0.9'da çözüldü
-
-**Çözüm**:
-- Extension'ınızı **güncelleyin** → v2.0.0 veya üzeri
-- `manifest.json` → `version: "2.0.0"` olmalı
+**📚 Detaylı anlatım**: [KULLANIM_TALIMATLARI.md - Büyük Görselleri Küçültme](KULLANIM_TALIMATLARI.md#adım-52-görselleri-hazırlayın)
 
 ---
 
-### 🔍 Debug (Geliştirici)
+### 🔍 Debug Modu (Gelişmiş)
 
 Konsolda hata ayıklama:
 
@@ -374,12 +391,61 @@ Projeye katkıda bulunmak isterseniz:
 
 ## 📞 İletişim & Destek
 
+### 🐛 Hata Bildirimi
+
+**GitHub Issues** (Önerilen):
+1. https://github.com/veyselkilicerkan/kaff-ikas-otomasyon/issues
+2. **[New Issue]** → Sorununuzu detaylı anlatın
+3. Ekran görüntüsü ekleyin
+
+**E-posta**: veysel@example.com  
+Konu: `[KAFF Extension] - [Sorun Özeti]`
+
+### 💬 Genel Sorular
+
+**Önce Bakın**:
+- 📚 [KULLANIM_TALIMATLARI.md](KULLANIM_TALIMATLARI.md) - Detaylı kılavuz
+- 🛠️ [Sorun Giderme](#️-sorun-giderme) - Yaygın hatalar
+- 📄 [PRD.md](PRD.md) - Teknik detaylar
+
+### 📬 İletişim
+
 **Geliştirici**: Veysel Kılıçerkan  
 **E-posta**: veysel@example.com  
-**GitHub**: [@veyselkilicerkan](https://github.com/veyselkilicerkan)
+**GitHub**: [@veyselkilicerkan](https://github.com/veyselkilicerkan)  
+**LinkedIn**: [Veysel Kılıçerkan](https://www.linkedin.com/in/veyselkilicerkan)
 
 **Müşteri**: KAFF Telefon Aksesuarları  
 **Web**: [www.kaff.com.tr](https://www.kaff.com.tr)
+
+---
+
+## � Ek Kaynaklar
+
+### 📖 Proje Dokümantasyonu
+- **[KULLANIM_TALIMATLARI.md](KULLANIM_TALIMATLARI.md)** - 🆕 Adım adım detaylı kılavuz (Yeni kullanıcılar için!)
+- **[PRD.md](PRD.md)** - Ürün gereksinimleri ve teknik mimari
+- **[TASKS.md](TASKS.md)** - Geliştirme yol haritası ve tamamlanan görevler
+- **[DOM_ANALYSIS.md](DOM_ANALYSIS.md)** - İkas DOM yapısı detaylı analizi
+
+### 🌐 Harici Kaynaklar
+- **İkas Destek**: https://support.ikas.com/tr/
+- **Chrome Extension API**: https://developer.chrome.com/docs/extensions/
+- **TinyJPG**: https://tinyjpg.com (Görsel küçültme)
+- **React Event System**: https://react.dev/learn/responding-to-events
+
+### 🎓 Öğrenim Kaynakları (Geliştiriciler için)
+- **Manifest V3 Geçiş Kılavuzu**: https://developer.chrome.com/docs/extensions/mv3/intro/
+- **React Synthetic Events**: https://react.dev/reference/react-dom/components/common#react-event-object
+- **FileReader API**: https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+
+---
+
+## 🙏 Teşekkürler
+
+- **İkas Platformu**: Güçlü e-ticaret altyapısı
+- **Chrome Extension Docs**: Detaylı dokümantasyon
+- **KAFF Ekibi**: Geri bildirim ve test desteği
 
 ---
 
@@ -395,7 +461,131 @@ Tek koşul: Yukarıdaki telif hakkı bildirimi tüm kopyalarda yer almalıdır.
 
 ---
 
-## 🙏 Teşekkürler
+## ❓ Sık Sorulan Sorular (FAQ)
+
+### 1️⃣ Extension güvenli mi? Verilerim çalınır mı?
+
+**Cevap**: Evet, %100 güvenli!
+- ✅ Sadece `ikas.com` ve `mykias.com` domainlerinde çalışır
+- ✅ Hiçbir veri dışarı gönderilmez
+- ✅ localStorage/cookie kullanılmaz
+- ✅ Açık kaynak kodludur, inceleyebilirsiniz
+
+---
+
+### 2️⃣ Hangi tarayıcılarda çalışır?
+
+**Cevap**:
+- ✅ Google Chrome 88+
+- ✅ Microsoft Edge 88+
+- ✅ Brave (Chromium tabanlı)
+- ❌ Firefox (farklı extension standardı kullanır)
+- ❌ Safari (farklı extension standardı kullanır)
+
+---
+
+### 3️⃣ Fiyat güncellemesi yapınca İkas'a anında yansıyor mu?
+
+**Cevap**: Evet! Extension, React state'ini doğrudan günceller. Değişiklikler 2-5 saniye içinde İkas veritabanına kaydedilir.
+
+---
+
+### 4️⃣ 100+ varyantım var, hepsini yükleyebilir miyim?
+
+**Cevap**: Evet! Ancak:
+- ⏱️ **Fiyat**: 100 varyant ≈ 5-10 saniye
+- ⏱️ **Stok**: 100 varyant ≈ 3-4 dakika (popup açma/kapama nedeniyle)
+- ⏱️ **Görsel**: 100 varyant × 4 görsel ≈ 8-10 dakika
+
+---
+
+### 5️⃣ Görselleri PNG formatında yükleyebilir miyim?
+
+**Cevap**: Hayır, sadece **JPG/JPEG** desteklenir. PNG'yi JPG'ye çevirin:
+- Windows: Paint → Aç → Farklı Kaydet → JPEG
+- Online: https://png2jpg.com
+
+---
+
+### 6️⃣ Extension ücretsiz mi?
+
+**Cevap**: Evet, **tamamen ücretsiz!** MIT lisanslıdır. İsterseniz kendi projenizde kullanabilirsiniz.
+
+---
+
+### 7️⃣ İkas dışında başka platformlarda çalışır mı?
+
+**Cevap**: Hayır, sadece **İkas** için özel geliştirilmiştir. Diğer platformlar (Shopify, Ticimax, vb.) farklı DOM yapısına sahiptir.
+
+---
+
+### 8️⃣ Varyant başına kaç görsel yükleyebilirim?
+
+**Cevap**: Sınır yok! Klasördeki tüm JPG dosyalarını yükler. Ancak:
+- ⚠️ İkas'ın kendi limiti: ~20-30 görsel/varyant (platform sınırı)
+- 💡 Önerilen: 3-5 görsel/varyant (hız optimizasyonu)
+
+---
+
+### 9️⃣ Extension kullanırken başka sekmede çalışabilir miyim?
+
+**Cevap**:
+- ✅ **Fiyat güncelleme**: Evet, arka planda çalışır
+- ❌ **Stok/Görsel yükleme**: Hayır, aktif sekmede kalmalısınız (popup açma nedeniyle)
+
+---
+
+### 🔟 Mobil cihazda (telefon/tablet) kullanabilir miyim?
+
+**Cevap**: Hayır, Chrome extension'ları sadece **masaüstü** tarayıcılarda çalışır.
+
+---
+
+## ✅ Hızlı Başlangıç Kontrol Listesi
+
+Yeni kullanıcılar için adım adım kontrol listesi:
+
+### Kurulum Aşaması
+- [ ] Extension dosyalarını indirdim
+- [ ] Chrome'a başarıyla yükledim
+- [ ] Extension ikonu sağ üstte görünüyor 🟡
+- [ ] İkas varyant sayfasında extension açılıyor
+
+### İlk Test (Test Ürünüyle Yapın!)
+- [ ] Test ürünü oluşturdum (3-5 varyant)
+- [ ] Fiyat güncelleme başarılı ✅
+- [ ] Stok güncelleme başarılı ✅
+- [ ] Görsel klasör yapısını hazırladım
+- [ ] Görsel yükleme başarılı ✅
+
+### Gerçek Kullanım
+- [ ] [KULLANIM_TALIMATLARI.md](KULLANIM_TALIMATLARI.md) dosyasını okudum
+- [ ] Gerçek ürünlerde fiyat güncelleme yaptım
+- [ ] Gerçek ürünlerde stok güncelleme yaptım
+- [ ] Gerçek ürünlerde görsel yükleme yaptım
+- [ ] Hata mesajlarını nasıl çözeceğimi öğrendim
+
+✅ **Tamamladınız mı? Artık uzman kullanıcısınız!** 🎉
+
+---
+
+## 🚀 Gelecek Özellikler (Roadmap)
+
+Planlanan geliştirmeler:
+
+- 🔄 **Toplu İndirim Uygulama** (%)
+- 📊 **Excel İçe/Dışa Aktarma**
+- 🎨 **PNG Görsel Desteği**
+- 🌍 **Çoklu Dil Desteği** (İngilizce, Almanca)
+- 📱 **Mobil Uyumlu Versiyon** (Progressive Web App)
+- 🔔 **Bildirim Sistemi** (İşlem tamamlandı bildirimleri)
+- 📝 **Varyant Açıklama Güncelleme**
+
+💡 **Öneriniz var mı?** → [GitHub Issues](https://github.com/veyselkilicerkan/kaff-ikas-otomasyon/issues) açın!
+
+---
+
+## 📚 Ek Kaynaklar
 
 - **İkas Platformu**: Güçlü e-ticaret altyapısı
 - **Chrome Extension Docs**: Detaylı dokümantasyon
@@ -406,9 +596,10 @@ Tek koşul: Yukarıdaki telif hakkı bildirimi tüm kopyalarda yer almalıdır.
 ## ⭐ Beğendiniz mi?
 
 Bu extension işinize yaradıysa:
-- ⭐ GitHub'da **yıldız verin**
+- ⭐ GitHub'da **yıldız verin** (Star)
 - 🐦 Sosyal medyada **paylaşın**
-- 💬 Geri bildirimlerinizi **iletin**
+- 💬 Geri bildirimlerinizi **GitHub Issues**'da paylaşın
+- 🤝 Projeye **katkıda bulunun** (Pull Request)
 
 ---
 
@@ -419,7 +610,24 @@ Bu extension işinize yaradıysa:
 ---
 
 <div align="center">
-  <img src="assets/icons/kaff-128.png" alt="KAFF Logo" width="64">
-  <p><strong>KAFF İkas Otomasyonu v2.0.0</strong></p>
-  <p>© 2026 - Tüm hakları saklıdır.</p>
+  <img src="assets/icons/kaff-128.png" alt="KAFF Logo" width="80">
+  
+  ### KAFF İkas Otomasyonu v2.0.0
+  
+  *Modern E-ticaret Yönetimi - Hızlı, Güvenilir, Açık Kaynak*
+  
+  Made with ❤️ by [Veysel Kılıçerkan](https://github.com/veyselkilicerkan)
+  
+  © 2026 - MIT Lisansı
+  
+  ---
+  
+  [🐛 Hata Bildir](https://github.com/veyselkilicerkan/kaff-ikas-otomasyon/issues) •
+  [🤝 Katkıda Bulun](https://github.com/veyselkilicerkan/kaff-ikas-otomasyon/pulls) •
+  [📚 Detaylı Kılavuz](KULLANIM_TALIMATLARI.md) •
+  [🌐 KAFF](https://www.kaff.com.tr)
+  
+  ⭐ **Star vererek projeyi destekleyin!** ⭐
+  
 </div>
+
