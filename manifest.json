@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "KAFF İkas Otomasyonu",
+  "version": "2.0.0",
+  "description": "Ikas panelinde varyant ve görsel işlemlerini otomatize eder.",
+  "icons": {
+    "16": "assets/icons/kaff-16.png",
+    "32": "assets/icons/kaff-32.png",
+    "48": "assets/icons/kaff-48.png",
+    "128": "assets/icons/kaff-128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.ikas.com/*",
+    "https://*.mykias.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "KAFF Kontrol Paneli",
+    "default_icon": {
+      "16": "assets/icons/kaff-16.png",
+      "32": "assets/icons/kaff-32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.ikas.com/*",
+        "https://*.mykias.com/*"
+      ],
+      "js": [
+        "test-simple.js",
+        "modules/reactHelper.js",
+        "modules/domFinder.js",
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "KAFF İkas Otomasyonu - DEBUG",
+  "version": "1.0.1",
+  "description": "Test versiyonu - Sorun giderme için",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.ikas.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "KAFF Kontrol Paneli"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.ikas.com/*"],
+      "js": ["test-simple.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

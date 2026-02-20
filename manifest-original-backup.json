@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "KAFF İkas Otomasyonu",
+  "version": "1.0",
+  "description": "Ikas panelinde varyant ve görsel işlemlerini otomatize eder.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.ikas.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "KAFF Kontrol Paneli"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.ikas.com/*"],
+      "js": [
+        "modules/reactHelper.js",
+        "modules/domFinder.js",
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

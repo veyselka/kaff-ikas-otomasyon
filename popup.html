@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ========================================
+       CSS VARIABLES - NUR TEMASI (Altın/Yeşil)
+       ======================================== */
+    :root {
+      --bg-gradient-start: #2d5016;
+      --bg-gradient-end: #1a3a0f;
+      --container-bg: #ffffff;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --border-color: #e5e7eb;
+      --button-primary: #2d5016;
+      --button-hover: #1a3a0f;
+      --success-bg: #d1fae5;
+      --success-text: #065f46;
+      --error-bg: #fee2e2;
+      --error-text: #991b1b;
+      --status-bg: #d1fae5;
+      --status-text: #10b981;
+      --accent-gold: #d4af37;
+      --accent-green: #2d5016;
+    }
+
+    body.dark-mode {
+      --bg-gradient-start: #0f1e0a;
+      --bg-gradient-end: #1a2f14;
+      --container-bg: #1a2f14;
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --border-color: #2d5016;
+      --button-primary: #3a6b1f;
+      --button-hover: #2d5016;
+      --success-bg: #064e3b;
+      --success-text: #6ee7b7;
+      --error-bg: #7f1d1d;
+      --error-text: #fca5a5;
+      --status-bg: #064e3b;
+      --status-text: #6ee7b7;
+    }
+
+    body { 
+      width: 360px; 
+      padding: 0;
+      font-family: 'Cormorant Garamond', 'Crimson Text', Georgia, serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      background: var(--container-bg);
+      border-radius: 12px;
+      margin: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      padding-bottom: 15px;
+      padding-right: 110px; /* Butonlar için yer açık */
+      border-bottom: 2px solid var(--border-color);
+      position: relative;
+    }
+
+    /* ========================================
+       DARK MODE TOGGLE BUTTON
+       ======================================== */
+    .theme-toggle {
+      position: absolute;
+      right: 0;
+      top: 5px;
+      background: var(--button-primary);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 19px;
+      transition: all 0.3s ease;
+      width: auto;
+      z-index: 10;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(20deg);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    }
+
+    .sound-toggle {
+      position: absolute;
+      right: 55px;
+      top: 5px;
+      background: transparent;
+      border: 2px solid var(--button-primary);
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 17px;
+      transition: all 0.3s ease;
+      width: auto;
+      z-index: 10;
+    }
+
+    .sound-toggle:hover {
+      background: var(--button-primary);
+      transform: scale(1.1);
+    }
+
+    .sound-toggle.muted {
+      opacity: 0.5;
+    }
+
+    .header img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    h3 { 
+      margin: 0;
+      color: var(--button-primary);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: 0;
+      line-height: 1.3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .brand-name {
+      background: linear-gradient(135deg, #d4af37 0%, #b8941e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 2px solid var(--border-color);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .footer .footer-quote {
+      font-size: 13px;
+      font-style: italic;
+      color: #d4af37;
+      margin-bottom: 6px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .footer .creator {
+      font-weight: 700;
+      color: #d4af37;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .footer .creator:hover {
+      color: #c9a22e;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .status { 
+      font-size: 13px;
+      color: var(--status-text);
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      background-color: var(--status-bg);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .status::before {
+      content: "●";
+      font-size: 17px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .section {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* ========================================
+       TOOLTIP HOVER EFFECT
+       ======================================== */
+    .section-title::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background: var(--text-primary);
+      color: var(--container-bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .section-title:hover::after {
+      opacity: 0.9;
+    }
+
+    .input-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--border-color);
+      background: var(--container-bg);
+      color: var(--text-primary);
+      border-radius: 6px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--button-primary);
+      box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.2);
+      transform: scale(1.02);
+    }
+
+    input:hover {
+      border-color: var(--button-primary);
+    }
+
+    input::placeholder {
+      font-size: 14px;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      font-weight: 500;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--button-primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    button:hover { 
+      background-color: var(--button-hover);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(45, 80, 22, 0.4);
+    }
+
+    button span {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover span:first-child {
+      transform: rotate(360deg) scale(1.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background-color: #9ca3af;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background-color: #6b7280;
+    }
+
+    .btn-secondary:hover {
+      background-color: #4b5563;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      display: none;
+      transition: all 0.3s ease;
+      animation: slideIn 0.5s ease;
+    }
+
+    .result.success {
+      background-color: var(--success-bg);
+      color: var(--success-text);
+      border: 1px solid var(--success-text);
+      display: block;
+    }
+
+    .result.error {
+      background-color: var(--error-bg);
+      color: var(--error-text);
+      border: 1px solid var(--error-text);
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================================
+       SUCCESS CONFETTI ANIMATION
+       ======================================== */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #f0f;
+      position: absolute;
+      animation: confetti-fall 3s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .success-checkmark {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .success-checkmark .check-icon {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      border-radius: 50%;
+      box-sizing: content-box;
+      border: 4px solid var(--success-text);
+      animation: scaleIn 0.5s ease;
+    }
+
+    .success-checkmark .check-icon::before {
+      top: 3px;
+      left: -2px;
+      width: 30px;
+      transform-origin: 100% 50%;
+      border-radius: 100px 0 0 100px;
+    }
+
+    .success-checkmark .check-icon::after {
+      top: 0;
+      left: 30px;
+      width: 60px;
+      transform-origin: 0 50%;
+      border-radius: 0 100px 100px 0;
+      animation: rotateCircle 0.5s ease;
+    }
+
+    @keyframes scaleIn {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+      margin: 15px 0;
+    }
+
+    .info-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      font-style: italic;
+      transition: all 0.3s ease;
+    }
+
+    /* ========================================
+       CONFETTI OVERLAY
+       ======================================== */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Stop butonu pulse animasyonu */
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+  
+  <div class="container">
+    <div class="header">
+      <img src="assets/icons/kaff-48.png" alt="KAFF Logo">
+      <h3>
+        <span class="brand-name">KAFF</span>
+        <span>Otomasyon</span>
+      </h3>
+      <button class="sound-toggle" id="sound-toggle" title="Ses Açık/Kapat">🔊</button>
+      <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">🌙</button>
+    </div>
+    <div class="status" id="status">Sistem Hazır</div>
+
+    <!-- Fiyat Güncelleme Bölümü -->
+    <div class="section">
+      <div class="section-title" data-tooltip="Tüm varyantların fiyatını tek seferde değiştir">💰 Fiyat Güncelleme</div>
+      <div class="input-group">
+        <label for="input-price">Yeni Fiyat (TL)</label>
+        <input type="number" id="input-price" placeholder="Örn: 1299" min="0" step="0.01">
+      </div>
+      <button id="btn-update-price">
+        <span>📝</span>
+        <span>Tüm Fiyatları Güncelle</span>
+      </button>
+      <p class="info-text">Tüm varyantların satış fiyatını aynı anda günceller</p>
+    </div>
+
+    <!-- Stok Güncelleme Bölümü -->
+    <div class="section">
+      <div class="section-title" data-tooltip="Her varyantın stok miktarını toplu güncelle">📦 Stok Güncelleme</div>
+      <div class="input-group">
+        <label for="input-stock">Yeni Stok Miktarı</label>
+        <input type="number" id="input-stock" placeholder="Örn: 10000" min="0" step="1">
+      </div>
+      <button id="btn-update-stock">
+        <span>📊</span>
+        <span>Tüm Stokları Güncelle</span>
+      </button>
+      <p class="info-text">Her varyantın stok popup'ını açıp günceller</p>
+    </div>
+
+    <!-- Görsel Yükleme Bölümü -->
+    <div class="section">
+      <div class="section-title" data-tooltip="Klasör seçerek otomatik görsel yükle">🖼️ Görsel Yükleme</div>
+      <div class="input-group">
+        <label>Tasarım klasörü (her model bir klasör)</label>
+        <button id="btn-pick-folder" type="button">
+          <span>📁</span>
+          <span>Klasör Seç</span>
+        </button>
+        <input type="file" id="input-folder" webkitdirectory directory multiple accept=".jpg,.jpeg" style="display: none;">
+        <p id="folder-status" class="info-text">Henüz klasör seçilmedi.</p>
+      </div>
+      <button id="btn-upload-images">
+        <span>🖼️</span>
+        <span>Tüm Görselleri Yükle</span>
+      </button>
+      <p class="info-text">Klasördeki her model klasöründeki .jpg dosyaları ilgili varyanta yüklenir.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Durdurma Butonu (Görünmez, sadece işlem sırasında gösterilecek) -->
+    <button id="btn-stop" style="display: none; background: #ef4444; margin-bottom: 10px; animation: pulse 1s infinite;">
+      <span>⏹️</span>
+      <span>İşlemi Durdur</span>
+    </button>
+
+    <!-- Test Bölümü -->
+    <button id="btn-test" class="btn-secondary">
+      <span>🔍</span>
+      <span>Bağlantı Testi</span>
+    </button>
+
+    <!-- Sonuç Mesajı -->
+    <div id="result" class="result"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-quote">"İman, insanı insan eder. Belki insanı sultan eder" - Bediüzzaman Said Nursi</div>
+      <div>Created by <a href="https://www.linkedin.com/in/veysel-karani-kiliçerkan-731393256" target="_blank" class="creator">Veysel Kılıçerkan</a></div>
+      <div style="margin-top: 4px; font-size: 11px;">© 2026 - İKAS Automation System</div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
